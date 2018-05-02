@@ -1,3 +1,13 @@
+<div class="col-md-12">
+  <div class="form-inline pull-right" style="margin-bottom: 10px;">
+    <%= search_form_for @q do |f| %>
+      <div class="form-group">
+        <%= f.search_field :title_or_body_cont, placeholder: "タイトルか本文を検索", class: "form-control" %>
+        <%= f.submit "検索", class: "btn btn-primary" %>
+      </div>
+    <% end %>
+  </div>
+</div>
 <div class="col-md-8">
   <% @posts.each do |post| %>
     <div class="artical">
@@ -8,6 +18,7 @@
       <p><%= link_to '続きを読む', post, class: "btn bnt-default" %></p>
     </div>
   <% end %>
+  <%= paginate @posts %>
 </div>
 <div class="col-md-4">
   <div class="thumbnail">
@@ -18,8 +29,7 @@
     </div>
   </div>
   <div class="list-group">
-    <% @new_posts.each_with_index do |post, index| %>
-      <% break if index >= 5 %>
+    <% @new_posts.each do |post| %>
       <%= link_to post.title, post, class: "list-group-item" %>
     <% end %>
   </div>
